@@ -17,7 +17,7 @@
 char *outfile = "/dev/null";
 
 void exitsig(int x) {
-  fatal("parent: Exiting on signal %d.\n", x);
+  fatal(_DEBUG_STRING("parent: Exiting on signal %d.\n"), x);
 }
 
 void handlechild(int x) {
@@ -31,7 +31,7 @@ void handlechild(int x) {
   //Did the child not exit() or return from main?
   if (!normal_exit) {
     int signal_term = WTERMSIG(status);
-    fatal("parent: Child process %d died with %s (%d).\n",
+    fatal(_DEBUG_STRING("parent: Child process %d died with %s (%d).\n"),
         childpid, strsignal(signal_term), status);
   }
 
@@ -40,18 +40,18 @@ void handlechild(int x) {
 }
 
 void needroot(void) {
-  fatal("You don't have permission attach to other users processes\n"
+  fatal(_DEBUG_STRING("You don't have permission attach to other users processes\n"
         " [hint] you need to sudo or be root or something\n"
-        " [hint] i hear someone has lpes\n"
+        " [hint] i hear someone has lpes\n")
   );
 }
 
 void usage(char *self) {
-  debug("Usage: %s [ -d ] [ -o file.txt ]\n"
+  debug(_DEBUG_STRING("Usage: %s [ -d ] [ -o file.txt ]\n"
         " -d - daemonize (reccommend using with -o flag)\n"
         " -o - output file\n"
         " output is dumped to stdout unless an output file is specified\n"
-        " stdout will be /dev/null if you daemonize\n",
+        " stdout will be /dev/null if you daemonize\n"),
         self);
   exit(3);
 }

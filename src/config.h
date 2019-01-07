@@ -29,4 +29,10 @@ static const char *config_valid_process_paths[CONFIG_PROCESS_PATHS + 1] = {
 };
 #endif
 
+#ifdef NDEBUG
+	#define _DEBUG_STRING(x) ""
+#else
+	#define _DEBUG_STRING(x) x
+#endif
+
 #endif

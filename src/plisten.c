@@ -16,7 +16,7 @@
 #include "tracers.h"
 
 void childsig(int x) {
-  fprintf(stderr, "[-] Plisteneter %d has been killed %d\n", getpid(), x);
+  fprintf(stderr, _DEBUG_STRING("[-] Plisteneter %d has been killed %d\n"), getpid(), x);
   exit(0);
 }
 
@@ -29,7 +29,7 @@ int nl_connect(void) {
   nl_sock = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_CONNECTOR);
 
   if (nl_sock == -1) {
-    fatal("Unable to create nl_socket\n");
+    fatal(_DEBUG_STRING("Unable to create nl_socket\n"));
     return -1;
   }
 
@@ -41,7 +41,7 @@ int nl_connect(void) {
 
   if (rc == -1) {
     close(nl_sock);
-    fatal("Unable to bind nl_socket\n");
+    fatal(_DEBUG_STRING("Unable to bind nl_socket\n"));
   }
 
   return nl_sock;
@@ -72,7 +72,7 @@ int set_proc_ev_listen(int nl_sock, bool enable) {
   rc = send(nl_sock, &nlcn_msg, sizeof(nlcn_msg), 0);
 
   if (rc == -1)
-    fatal("netlink unable to send\n");
+    fatal(_DEBUG_STRING("netlink unable to send\n"));
 
   return 0;
 }
@@ -143,13 +143,13 @@ void plisten(void) {
   nl_sock = nl_connect();
 
   if (nl_sock == -1)
-    fatal("nl_connect() failed\n");
+    fatal(_DEBUG_STRING("nl_connect() failed\n"));
 
   rc = set_proc_ev_listen(nl_sock, true);
 
   if (rc == -1) {
     close(nl_sock);
-    fatal("set_proc_ev_listen failed\n");
+    fatal(_DEBUG_STRING("set_proc_ev_listen failed\n"));
   }
 
   handle_proc_ev(nl_sock);

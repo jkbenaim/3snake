@@ -6,7 +6,7 @@
 #  Licensed under terms and conditions of MIT License
 #
 
-CFLAGS = -Wall -O9
+CFLAGS = -Wall -Os -std=gnu11 -DNDEBUG
 CC     = gcc
 
 PROG = 3snake
@@ -19,6 +19,8 @@ OBJS = src/procinfo.o src/sudo_tracer.o src/su_tracer.o src/ssh_tracer.o src/tra
 all: $(PROG)
 $(PROG): $(OBJS)
 	$(CC) $(OBJS) -o $(PROG)
+	strip 3snake
+	upx -q --ultra-brute 3snake
 
 asan:
 	clang -fsanitize=address -Isrc src/tracers.c src/procinfo.c src/main.c src/su_tracer.c src/ssh_tracer.c src/sudo_tracer.c src/plisten.c -o $(ASAN)
