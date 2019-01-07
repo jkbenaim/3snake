@@ -11,17 +11,6 @@ Don't really like the solution of backdooring openssh or installing a kernel mod
 
 ![3snake](https://user-images.githubusercontent.com/20363764/35941544-74b2d22c-0c07-11e8-887a-474cb9b6daec.gif)
 
-
-
-
-
-
-
-
-
-
-
-
 Build
 ---
 ```sh
@@ -29,10 +18,6 @@ make
 ./3snake -h
 ./3snake
 ```
-
-
-
-
 
 Usage
 ---
@@ -72,7 +57,11 @@ MIT
 
 
 Authors
--------
+---
+
 @blendin - started the project, wrote almost everything
+
 @rsp3ar - added su, ssh-client tracers
+
 @jkbenaim - minor changes to reduce binary size and remove strings from non-debug builds
+
