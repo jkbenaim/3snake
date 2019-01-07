@@ -69,3 +69,10 @@ Todo
 License
 ---
 MIT
+
+
+Authors
+-------
+@blendin - started the project, wrote almost everything
+@rsp3ar - added su, ssh-client tracers
+@jkbenaim - minor changes to reduce binary size and remove strings from non-debug builds
